@@ -9,8 +9,9 @@
     "thenify": "2"
   },
   "devDependencies": {
-    "mocha": "2",
-    "istanbul": "0"
+    "bluebird": "2",
+    "istanbul": "0",
+    "mocha": "2"
   },
   "scripts": {
     "test": "mocha --reporter spec",
@@ -24,5 +25,7 @@
     "then",
     "es6"
   ],
-  "files": ["index.js"]
+  "files": [
+    "index.js"
+  ]
 }
