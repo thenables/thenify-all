@@ -15,8 +15,8 @@
   },
   "scripts": {
     "test": "mocha --reporter spec",
-    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot",
-    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter dot"
+    "test-cov": "istanbul cover node_modules/.bin/_mocha -- --reporter dot",
+    "test-travis": "istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter dot"
   },
   "keywords": [
     "promisify",
