@@ -26,7 +26,7 @@ fs.readFile(__filename).then(function (buffer) {
 
 ## API
 
-### var obj = thenify(source, obj, methods)
+### var obj = thenify(source, [obj], [methods])
 
 - `source` - the source object for the async functions
 - `obj` - the destination to set all the promisified methods
