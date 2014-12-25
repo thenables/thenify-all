@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": "thenables/thenify-all",
   "dependencies": {
-    "thenify": "2"
+    "thenify": "3"
   },
   "devDependencies": {
     "bluebird": "2",
