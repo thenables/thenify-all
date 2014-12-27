@@ -25,9 +25,17 @@ module.exports = function (source, destination, methods) {
 
   // proxy the rest
   Object.keys(source).forEach(function (name) {
+    if (deprecated(source, name)) return
     if (destination[name]) return
     destination[name] = source[name]
   })
 
   return destination
+}
+
+function deprecated(source, name) {
+  var desc = Object.getOwnPropertyDescriptor(source, name)
+  if (!desc || !desc.get) return false
+  if (desc.get.name === 'deprecated') return true
+  return false
 }
