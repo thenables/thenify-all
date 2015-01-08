@@ -1,7 +1,37 @@
 
 var thenify = require('thenify')
 
-module.exports = function (source, destination, methods) {
+module.exports = thenifyAll
+
+/**
+ * Promisifies all the selected functions in an object.
+ *
+ * @param {Object} source the source object for the async functions
+ * @param {Object} [destination] the destination to set all the promisified methods
+ * @param {Array} [methods] an array of method names of `source`
+ * @return {Object}
+ * @api public
+ */
+
+function thenifyAll(source, destination, methods) {
+  return promisifyAll(source, destination, methods, thenify)
+}
+
+/**
+ * Promisifies all the selected functions in an object and backward compatible with callback.
+ *
+ * @param {Object} source the source object for the async functions
+ * @param {Object} [destination] the destination to set all the promisified methods
+ * @param {Array} [methods] an array of method names of `source`
+ * @return {Object}
+ * @api public
+ */
+
+thenifyAll.withCallback= function(source, destination, methods) {
+  return promisifyAll(source, destination, methods, thenify.withCallback)
+}
+
+function promisifyAll(source, destination, methods, promisify) {
   if (!destination) {
     destination = {};
     methods = Object.keys(source)
@@ -16,11 +46,11 @@ module.exports = function (source, destination, methods) {
     methods = Object.keys(source)
   }
 
-  if (typeof source === 'function') destination = thenify(source)
+  if (typeof source === 'function') destination = promisify(source)
 
   methods.forEach(function (name) {
     // promisify only if it's a function
-    if (typeof source[name] === 'function') destination[name] = thenify(source[name])
+    if (typeof source[name] === 'function') destination[name] = promisify(source[name])
   })
 
   // proxy the rest
