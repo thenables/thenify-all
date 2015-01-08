@@ -28,6 +28,16 @@ fs.readFile(__filename).then(function (buffer) {
 
 ### var obj = thenify(source, [obj], [methods])
 
+Promisifies all the selected functions in an object.
+
+- `source` - the source object for the async functions
+- `obj` - the destination to set all the promisified methods
+- `methods` - an array of method names of `source`
+
+### var obj = thenify.withCallback(source, [obj], [methods])
+
+Promisifies all the selected functions in an object and backward compatible with callback.
+
 - `source` - the source object for the async functions
 - `obj` - the destination to set all the promisified methods
 - `methods` - an array of method names of `source`

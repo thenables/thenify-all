@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": "thenables/thenify-all",
   "dependencies": {
-    "thenify": "3"
+    "thenify": "^3.1.0"
   },
   "devDependencies": {
     "bluebird": "2",
@@ -27,5 +27,8 @@
   ],
   "files": [
     "index.js"
-  ]
+  ],
+  "engines": {
+    "node": ">=0.10"
+  }
 }

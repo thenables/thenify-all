@@ -45,3 +45,24 @@ it('thenifyAll(fs, destination)', function () {
     assert(stat.size, fs.statSync(__filename).size)
   })
 })
+
+it('thenifyAll.withCallback(fs, {}, ["readFile"]) as promise', function () {
+  var fs = thenify.withCallback(require('fs'), {}, [
+    'readFile',
+  ])
+
+  return fs.readFile(__filename, 'utf8').then(function (string) {
+    assert(~string.indexOf('kasjdflasjkdflajsdfklajs dajsdfakls;dfjal;ksdfj akls;dfj als;kdfj asdf'))
+  })
+})
+
+it('thenifyAll.withCallback(fs, {}, ["readFile"]) as callback', function (done) {
+  var fs = thenify.withCallback(require('fs'), {}, [
+    'readFile',
+  ])
+
+  return fs.readFile(__filename, 'utf8', function (err, string) {
+    assert(~string.indexOf('kasjdflasjkdflajsdfklajs dajsdfakls;dfjal;ksdfj akls;dfj als;kdfj asdf'))
+    done(err)
+  })
+})
