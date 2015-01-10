@@ -2,6 +2,8 @@
 var thenify = require('thenify')
 
 module.exports = thenifyAll
+thenifyAll.withCallback = withCallback
+thenifyAll.thenify = thenify
 
 /**
  * Promisifies all the selected functions in an object.
@@ -27,7 +29,7 @@ function thenifyAll(source, destination, methods) {
  * @api public
  */
 
-thenifyAll.withCallback= function(source, destination, methods) {
+function withCallback(source, destination, methods) {
   return promisifyAll(source, destination, methods, thenify.withCallback)
 }
 
