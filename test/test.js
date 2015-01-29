@@ -46,6 +46,44 @@ it('thenifyAll(fs, destination)', function () {
   })
 })
 
+it('thenifyAll(user, ["show"]) should maintain the receiver', function () {
+  var user = Object.create({
+    show: function (cb) {
+      cb(null, this.name);
+    }
+  }, {
+    name: {
+      value: 'test'
+    }
+  });
+
+  return thenify(user, ['show']).show().then(function (name) {
+    assert.equal(name, 'test')
+  })
+})
+
+it('thenifyAll(user) should maintain the receiver', function () {
+  var user = {
+    name: 'test',
+    load: function () {
+      var cb = arguments[arguments.length - 1]
+      cb(null, this.name)
+    },
+    show: function (cb) {
+      this.load(cb)
+    }
+  };
+
+  user = thenify(user)
+
+  return user.load().then(function (name) {
+    assert.equal(name, 'test')
+    return user.show().then(function (name) {
+      assert.equal(name, 'test')
+    })
+  })
+})
+
 it('thenifyAll.withCallback(fs, {}, ["readFile"]) as promise', function () {
   var fs = thenify.withCallback(require('fs'), {}, [
     'readFile',

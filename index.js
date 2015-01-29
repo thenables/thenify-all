@@ -52,7 +52,7 @@ function promisifyAll(source, destination, methods, promisify) {
 
   methods.forEach(function (name) {
     // promisify only if it's a function
-    if (typeof source[name] === 'function') destination[name] = promisify(source[name])
+    if (typeof source[name] === 'function') destination[name] = promisify(source[name]).bind(source)
   })
 
   // proxy the rest
